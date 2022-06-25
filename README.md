@@ -14,7 +14,7 @@ Information about fuel use is included in this dataset. Several modes and types 
 
 **Sample data visualization:** 
 
-![[include your favorite visualization from this project here]_](https://github.com/Maldowin/dataviz_final_project/blob/main/Project-01/Implemented%20fuels%20over%20time.jpg)
+![Implemented fuels over time](https://user-images.githubusercontent.com/105830129/175755369-b1a50c6b-258b-4aec-81af-43ee6111c2cd.jpg)
 
 
 
@@ -24,8 +24,9 @@ This data set contains data on births in the state of California. It's also brok
 
 **Sample data visualization:** 
 
-_[include your favorite visualization from this project here]_
-<img src="https://github.com/Maldowin/dataviz_final_project/blob/main/project-02/Birth%20in%20California.jpg" width="60%" height="60%">
+
+![Birth in California](https://user-images.githubusercontent.com/105830129/175755314-c4a8af4e-b0e3-456a-ac30-6d7782f40683.jpg)
+
 
 
 ## Project 03
@@ -39,6 +40,6 @@ This data set contains lyrics from the Billboard Top 100 and analyzes each work'
 
 ### Moving Forward
 
-_add here a short reflection on what you learned and what you plan to continue exploring in terms of data visualization, data storytelling, reproducible research, and/or related topics_
+I felt a range of emotions during the first week of this course, including worry and exhilaration. I've had the chance to improve my understanding of data visualization through the topics we discuss each week. I'm now trying to put what I just learnt into practice and keep myself informed of fresh information.
 
-I learnd 
+
