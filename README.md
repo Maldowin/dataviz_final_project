@@ -2,7 +2,7 @@
 
 > Edwin Maldonado. 
 
-Learn more about me in my [GitHub profile page](https://github.com/reiminer)
+Learn more about me in my [GitHub profile page](https://github.com/Maldowin)
 
 
 The following is a sample of products created during the _"Data Visualization and Reproducible Research"_ course.
@@ -10,37 +10,31 @@ The following is a sample of products created during the _"Data Visualization an
 
 ## Project 01
 
-In the `project_01/` folder you can find... _[Information about fuel use is included in this dataset. Several modes and types of cars have been put through testing to determine their effectiveness, consuption, and contamination.
-]_
+Information about fuel use is included in this dataset. Several modes and types of cars have been put through testing to determine their effectiveness, consuption, and contamination.
 
 **Sample data visualization:** 
 
-_[include your favorite visualization from this project here]_
-
-
+![[include your favorite visualization from this project here]_](https://github.com/Maldowin/dataviz_final_project/blob/main/Project-01/Implemented%20fuels%20over%20time.jpg)
 
 
 
 ## Project 02
 
-In this project, I explored ... _[short description of your revised project goes here]_ Find the code and report in the `project_02/` folder.
+This data set contains data on births in the state of California. It's also broken down into three categories: typical-age mothers, teen mothers, and older mothers. You can also learn more about these organizations in any of California's counties. For this data set, information was accessible from 2008 to 2016.
 
 **Sample data visualization:** 
 
 _[include your favorite visualization from this project here]_
-<img src="https://github.com/reisanar/dataviz_final_project/blob/main/figures/fl_higher_ed.png" width="60%" height="60%">
-
-(you can also place your figures in the `figures/` folder and use the `![](path_to_picture)` option to add the pictures here)
+<img src="https://github.com/Maldowin/dataviz_final_project/blob/main/project-02/Birth%20in%20California.jpg" width="60%" height="60%">
 
 
 ## Project 03
 
-In this project, I explored ... _[short description of your revised project goes here]_
+This data set contains lyrics from the Billboard Top 100 and analyzes each work's performance, yielding interesting results such as "watch" being the most common word in the top 15, followed by "love" and "I'm."
 
 **Sample data visualization:** 
 
-_[include your favorite visualization from this project here]_
-<img src="https://github.com/reisanar/figs/raw/master/jackie_jessie_marion.png" width="80%" height="80%">
+![The most frequent word](https://user-images.githubusercontent.com/105830129/175754658-4af28dac-314b-44cc-9496-9c76a216430f.jpg)
 
 
 ### Moving Forward
