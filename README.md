@@ -40,3 +40,5 @@ This data set contains lyrics from the Billboard Top 100 and analyzes each work'
 ### Moving Forward
 
 _add here a short reflection on what you learned and what you plan to continue exploring in terms of data visualization, data storytelling, reproducible research, and/or related topics_
+
+I learnd 
