@@ -1,0 +1,181 @@
+---
+title: "Mini-Project 02"
+output: 
+  html_document:
+    keep_md: true
+    toc: true
+    toc_float: true
+---
+
+# Data Visualization Project 02
+
+
+#### Loading libraries and get data set
+
+```{r}
+library(tidyverse)
+
+cali_birth <- read_csv("../data/california_birth.csv", col_types = cols())
+```
+
+#### Checking data set
+
+```{r}
+str(cali_birth)
+```
+## Interactive plot
+
+For each county, we can see that this data set is divided into "agegrp" groups, one of which is "Total Birth". We are going to get rid of this because the math does not make sense if we check it, and in addition, it is not required for this analysis.
+
+```{r}
+births_year <- cali_birth %>% group_by(year, agegrp) %>%
+    filter(agegrp != "Total Births")
+
+births_year
+```
+
+Now that we have cleared it up, let's check the percentage of each group.
+
+```{r}
+births_yearngroup <- births_year %>% 
+               group_by(year, agegrp) %>%
+               summarize(total = sum(count))%>%
+               mutate(freq = total / sum(total),
+               pct = round((freq*100), 2))  
+
+births_yearngroup
+```
+
+
+```{r}
+library(plotly)
+
+P2.1 <- ggplot(births_yearngroup, aes(x = year, y = pct, fill = agegrp)) +
+     geom_col(position = "dodge2") +
+     labs(title = "Birth in California by a group of women",x = "Years",y = "Percent", fill = "Groups")+
+     coord_cartesian(xlim =c(2008, 2016)) +
+     scale_fill_brewer(type = "qual", palette = "Dark2")
+
+my_plot <- ggplotly(P2.1)
+my_plot
+```
+**Comment**
+
+It is important to note that the percentage of typical age mothers has not changed significantly, remaining at 72.94 to 73.86.
+
+This gives us a good perspective since they are the majority in this data set.
+
+```{r}
+library(htmlwidgets)
+saveWidget(my_plot, "my_plot.html")
+```
+
+## Spatial visualization
+
+#### Loading libraries and get data set
+
+```{r load-libraries-data, warning=FALSE, message=FALSE}
+library(sf)
+# Load 
+cali_counties <- read_sf("../data/ca-county-boundaries/CA_Counties/CA_Counties_TIGER2016.shp")
+```
+
+```{r}
+cali_counties
+```
+
+To see which counties contribute the most births, we'll need to establish a new dataframe.
+
+```{r}
+births_yearTotal <- cali_birth %>% 
+                    group_by(year, agegrp) %>%
+                    filter(agegrp == "Total Births")
+
+births_yearTotal
+```
+
+```{r}
+colnames(births_yearTotal)[2] <- "NAME"
+```
+
+To make these two date sets plot, let's mix them.
+
+```{r}
+birth_map <- cali_counties %>%
+  left_join(births_yearTotal, by = "NAME")
+```
+
+```{r}
+
+P2.2 <- ggplot(birth_map) +
+         geom_sf(aes(fill = count), 
+         alpha=0.9, col="white") +
+         scale_fill_viridis_c(name = "Births", trans = "log2", option = "plasma") +
+         labs(title = "Birth in California") 
+P2.2
+```
+```{r}
+library("svglite")
+ggsave("Birth in California.jpg", P2.2)
+```
+
+
+**Comment**
+
+There is a county in yellow, which is LA, that has the highest number of births. There are also more in orange that could be big cities like San Francisco.
+
+
+## visualization of a model
+
+```{r}
+library(broom)
+```
+
+```{r}
+births_yearTotal%>% 
+ top_n(count, n = 5)
+```
+
+```{r}
+births_yearLA <- cali_birth %>% group_by(year, agegrp) %>%
+    filter(agegrp == "Older Mothers (35 years old or older)" & patcnty == "Los Angeles")
+
+births_yearLA
+```
+
+```{r}
+birth_model <- lm(count ~ year, data = births_yearLA)
+```
+
+```{r}
+P2.3 <- ggplot(births_year2, aes(x = year, y = count)) +
+         geom_point() +
+         geom_smooth(method = "loess", 
+              formula = "y ~ x") + 
+         theme_minimal()
+P2.3
+```
+
+**Comment**
+As we've seen, LA has one of the highest birth rates in California. We'll most likely need to compare to a similar-sized city. For the time being, we're seeing a linear model around the year in question.
+
+```{r}
+birth_model2<- tidy(birth_model, conf.int = TRUE)%>%
+  filter(term != "(Intercept)")
+```
+
+```{r}
+glance(birth_model)
+```
+
+```{r}
+P2.4 <- ggplot(birth_model2,
+            aes(x = estimate, 
+                y = fct_rev(term))) +
+            geom_pointrange(aes(xmin = conf.low, xmax = conf.high)) +
+            geom_vline(xintercept = 0,  color = "purple") + 
+  theme_minimal()
+
+P2.4
+```
+
