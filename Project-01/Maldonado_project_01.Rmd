@@ -1,0 +1,141 @@
+---
+title: "Data Visualization for Data Exploration"
+author: "Edwin Maldonado - `emaldonado1127@floridapoly.com`"
+output: html_notebook
+---
+
+### Loading libraries
+
+
+```{r}
+library("dplyr") 
+library("ggplot2")
+library("tidyverse")
+```
+
+### Reading the dataset
+
+```{r}
+vehicle <- read_csv("C:\\Users\\maldo\\OneDrive\\Desktop\\FloridaPoly\\Data vizualization\\dataviz_mini-project_01 Edwin Maldonado\\data\\fuel.csv", col_types = cols())
+```
+
+### Checking dataset
+
+```{r}
+head(vehicle)
+```
+
+```{r}
+str(vehicle)
+```
+
+Let's do some grouping.
+
+First, let's check how many regular fuel car types are available in this data set.
+
+```{r}
+vehicle1 <- vehicle %>%
+  group_by(fuel_type) %>%
+  summarize(total = n()) %>% 
+  mutate(proportion = total / sum(total))
+
+vehicle1
+```
+
+## What is the most common type of automobile fuel?
+
+Let's visualize this chart into a lollipop graph.
+
+```{r}
+
+P1.1 <- ggplot(vehicle1,aes(x = fuel_type, y = proportion, color = fuel_type)) +
+  
+        geom_pointrange(aes(ymin = 0, ymax = proportion)) +
+        guides(color = FALSE) +
+  
+        labs(x = "", y = "Proportion", title = "Quantity of various types of car fuels", subtitle = "Vehicles") +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 0.8, hjust=1, family="Courier", face="italic"),
+              plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+              plot.subtitle = element_text(size = 12, hjust = 0.5))
+P1.1
+```
+
+```{r}
+install.packages("svglite")
+```
+
+```{r}
+library("svglite")
+ggsave("Quantity of various types of car fuels.jpg", P1.1, width = 4, height = 4)
+
+```
+
+
+_**Comment**_
+
+As we see in this graph, the most common fuel type is "regular". More than 60% of cars use this type of fuel. We normally know this fuel as "gasoline".
+
+I was specting this result since this is a common fuel, but I was also wondering about how far we are from renewable fuel.
+
+For this first visualization, we just consider the "Fuel_type" column. There are other columns that need to be included, like "fuel_type_1".
+
+
+## How efficient is performance in cities and highways by fuel type?.
+
+```{r}
+
+P1.2 <- ggplot(vehicle, aes(composite_city_mpg, composite_highway_mpg, color = fuel_type)) +
+   
+        geom_jitter(width = .5, size=3) +
+   
+       labs(subtitle="(mpg)", 
+                   y="Highway", 
+                   x="City", 
+               title="Efficient by fuel type",
+              color = "Fuel type") +
+       theme(legend.position="right",
+              plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+              plot.subtitle = element_text(size = 12, hjust = 0.5))
+
+P1.2 
+```
+
+```{r}
+ggsave("Efficient by fuel type.jpg", P1.2, width = 7, height = 4)
+```
+
+_**Comment**_
+
+We can see that electric automobiles and fuels derived from non-renewable resources have the maximum efficiency.
+This is a frequent graphic that we make with this type of data set, but I chose to look at this type of fuel since we are paying more for it these days.
+
+Along with efficiency, cost will be an important factor to consider. That may be a fascinating investigation.
+
+
+## How fuels type have been implemented over time?
+
+```{r}
+library("ggridges")
+P1.3 <- ggplot(vehicle, aes(x = year, y = fuel_type, fill = fuel_type)) +
+  geom_density_ridges() +
+  guides(fill = FALSE)+
+  scale_fill_viridis_d(option = "m")+
+  labs(y = "", x = "Years", title = "Implemented fuels over time", subtitle = "Vehicles")+
+  theme(
+        legend.position = "none",
+        plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+        plot.subtitle = element_text(size = 12, hjust = 0.5))
+
+P1.3
+```
+
+```{r}
+ggsave("Implemented fuels over time.jpg", P1.3, width = 7, height = 4)
+```
+
+_**Comment**_
+
+It can be interesting to plot some historical data about this fuel introduction. In this plot, there is a decrease in regular fuel. Electric fuel or cars are getting more attention. This may be because of preview analysis about efficacy.
+
+It is important to point out that companies are looking to replace nonrenewable fuel for renewable fuel. This plot confirms this assumption.
