@@ -1,6 +1,6 @@
 # Data Visualization and Reproducible Research
 
-> Firstname Lastname. 
+> Edwin Maldonado. 
 
 Learn more about me in my [GitHub profile page](https://github.com/reiminer)
 
@@ -10,12 +10,13 @@ The following is a sample of products created during the _"Data Visualization an
 
 ## Project 01
 
-In the `project_01/` folder you can find... _[short description of your revised project goes here]_
+In the `project_01/` folder you can find... _[Information about fuel use is included in this dataset. Several modes and types of cars have been put through testing to determine their effectiveness, consuption, and contamination.
+]_
 
 **Sample data visualization:** 
 
 _[include your favorite visualization from this project here]_
-<img src="https://github.com/reisanar/figs/raw/master/echarts.png" width="70%" height="70%">
+
 
 
 
